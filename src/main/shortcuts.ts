@@ -167,11 +167,7 @@ function registerGlobal () {
             }
           }).catch(() => {})
 
-        if (!entry.keepModKeys) {
-          pressKeysToCopyItemText()
-        } else {
-          pressKeysToCopyItemText(entry.shortcut.split(' + ').filter(key => isModKey(key)))
-        }
+        pressKeysToCopyItemText()
       }
     })
 
@@ -193,20 +189,7 @@ function unregisterGlobal () {
 }
 
 function pressKeysToCopyItemText (pressedModKeys: string[] = []) {
-  let keys = mergeTwoHotkeys('Ctrl + C', gameConfig?.highlightKey || 'Alt').split(' + ')
-  keys = keys.filter(key => key !== 'C' && !pressedModKeys.includes(key))
-
-  for (const key of keys) {
-    robotjs.keyToggle(key, 'down')
-  }
-
-  // finally press `C` to copy text
-  robotjs.keyTap('C')
-
-  keys.reverse()
-  for (const key of keys) {
-    robotjs.keyToggle(key, 'up')
-  }
+  robotjs.keyTap('C', ['Ctrl', gameConfig?.highlightKey || 'Alt'])
 }
 
 export function setupShortcuts () {

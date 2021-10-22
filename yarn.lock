@@ -3778,9 +3778,9 @@ electron-osx-sign@^0.5.0:
     minimist "^1.2.0"
     plist "^3.0.1"
 
-electron-overlay-window@hsource/electron-overlay-window#v3.0.0-macos.1:
-  version "3.0.0-macos.1"
-  resolved "https://codeload.github.com/hsource/electron-overlay-window/tar.gz/0fe197e691ba21f49bb15942547944c07e5f1c2e"
+electron-overlay-window@hsource/electron-overlay-window#3.0.0-macos.2:
+  version "3.0.0-macos.2"
+  resolved "https://codeload.github.com/hsource/electron-overlay-window/tar.gz/17700b26ef2d298ac0238e1fc27f74b74aaf8cef"
   dependencies:
     node-gyp-build "4.x.x"
     throttle-debounce "3.x.x"
