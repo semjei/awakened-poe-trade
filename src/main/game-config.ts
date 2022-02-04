@@ -24,7 +24,11 @@ export function readConfig (): GameConfig {
   let filePath = appConfig.get('gameConfig')
 
   if (!filePath) {
-    filePath = path.join(app.getPath('documents'), 'My Games', 'Path of Exile', 'production_Config.ini')
+    if (process.platform === 'darwin') {
+      filePath = path.join(app.getPath('appData'), 'Path of Exile', 'Preferences', 'production_Config.ini')
+    } else {
+      filePath = path.join(app.getPath('documents'), 'My Games', 'Path of Exile', 'production_Config.ini')
+    }
     try {
       fs.accessSync(filePath)
       appConfig.set('gameConfig', filePath)
