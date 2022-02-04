@@ -36,7 +36,7 @@ class PoeWindowClass extends EventEmitter {
     OW.events.on('focus', () => { this.isActive = true })
     OW.events.on('blur', () => { this.isActive = false })
 
-    OW.attachTo(window, config.get('windowTitle'))
+    OW.attachTo(window, config.get('windowTitle'), { hasTitleBarOnMac: true })
   }
 
   onAttach (cb: (hasAccess: boolean | undefined) => void) {
