@@ -262,8 +262,14 @@ function pressKeysToCopyItemText (pressedModKeys: string[] = []) {
     robotjs.keyToggle(key, 'down')
   }
 
+  const modifierKeys = keys.filter(key => ['Ctrl', 'Alt', 'Shift'].includes(key))
   // finally press `C` to copy text
-  robotjs.keyTap('C')
+  robotjs.keyTap(
+    'C',
+    // On Mac, robotjs requires the modifiers to be specified in this way to
+    // register. See https://github.com/octalmage/robotjs/issues/208#issuecomment-223828356
+    process.platform === 'darwin' ? modifierKeys : undefined
+  )
 
   keys.reverse()
   for (const key of keys) {
