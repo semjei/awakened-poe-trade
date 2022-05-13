@@ -255,20 +255,42 @@ function unregisterGlobal () {
 }
 
 function pressKeysToCopyItemText (pressedModKeys: string[] = []) {
-  let keys = mergeTwoHotkeys('Ctrl + C', gameConfig?.highlightKey || 'Alt').split(' + ')
-  keys = keys.filter(key => key !== 'C' && !pressedModKeys.includes(key))
+  const keysString =
+    config.get('copyItemTextKey') ??
+    mergeTwoHotkeys('Ctrl + C', gameConfig?.highlightKey || 'Alt')
+
+  // We convert to lower-case because strangely, robotjs seems to support
+  // "command" but not "Command" as a modifier on Mac.
+  let keys = keysString.split('+').map(key => key.trim().toLowerCase())
+  keys = keys
+    .filter(key => key !== 'c' && !pressedModKeys.includes(key))
+    .map(key => {
+      // The only supported modifier keys are listed here:
+      // https://github.com/octalmage/robotjs/blob/c9cbd98ec47378dfae62871f0f2830782322b06d/src/robotjs.cc#L413
+      //
+      // Convert other keys to the supported versions
+      if (key === 'ctrl') return 'control';
+      if (key === 'cmd') return 'command';
+      return key;
+    })
+
+  // On Mac, robotjs requires the modifiers to be specified as the second
+  // argument of `keyTap` to register. See https://github.com/octalmage/robotjs/issues/208#issuecomment-223828356
+  let modifierKeys: string[] | undefined = undefined;
+  if (process.platform === 'darwin') {
+    const allModifierKeys = ['control', 'alt', 'shift', 'command']
+    modifierKeys = keys.filter(key => allModifierKeys.includes(key))
+    keys = keys.filter(key => !allModifierKeys.includes(key))
+  }
 
   for (const key of keys) {
     robotjs.keyToggle(key, 'down')
   }
 
-  const modifierKeys = keys.filter(key => ['Ctrl', 'Alt', 'Shift'].includes(key))
   // finally press `C` to copy text
   robotjs.keyTap(
     'C',
-    // On Mac, robotjs requires the modifiers to be specified in this way to
-    // register. See https://github.com/octalmage/robotjs/issues/208#issuecomment-223828356
-    process.platform === 'darwin' ? modifierKeys : undefined
+    modifierKeys
   )
 
   keys.reverse()

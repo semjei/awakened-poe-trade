@@ -19,6 +19,7 @@ export interface Config {
   overlayBackgroundClose: boolean
   itemCheckKey: string | null
   delveGridKey: string | null
+  copyItemTextKey: string | null
   restoreClipboard: boolean
   commands: Array<{
     text: string
@@ -49,6 +50,7 @@ export const defaultConfig = (): Config => ({
   overlayBackgroundClose: true,
   itemCheckKey: null,
   delveGridKey: null,
+  copyItemTextKey: null,
   restoreClipboard: true,
   commands: [{
     text: '/hideout',
