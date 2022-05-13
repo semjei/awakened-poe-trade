@@ -255,7 +255,11 @@ function unregisterGlobal () {
 }
 
 function pressKeysToCopyItemText (pressedModKeys: string[] = []) {
-  let keys = mergeTwoHotkeys('Ctrl + C', gameConfig?.highlightKey || 'Alt').split(' + ')
+  const keysString =
+    config.get('copyItemTextKey') ??
+    mergeTwoHotkeys('Ctrl + C', gameConfig?.highlightKey || 'Alt')
+
+  let keys = keysString.split(' + ')
   keys = keys.filter(key => key !== 'C' && !pressedModKeys.includes(key))
 
   for (const key of keys) {
