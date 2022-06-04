@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/SnosMe/awakened-poe-trade.git"
+    "url": "https://github.com/semjei/awakened-poe-trade.git"
   },
   "main": "background.js",
   "dependencies": {
@@ -34,9 +34,10 @@
     "fast-deep-equal": "3.1.x",
     "ini": "^2.0.0",
     "luxon": "2.x.x",
+    "npm": "^8.12.1",
     "object-hash": "^2.1.1",
     "robotjs": "^0.6.0",
-    "tailwindcss": "1.x.x",
+    "tailwindcss": "^3.0.24",
     "throttle-debounce": "3.0.x",
     "tippy.js": "^6.2.7",
     "uiohook-napi": "1.0.x",
@@ -60,7 +61,7 @@
     "@vue/cli-plugin-typescript": "5.0.0-beta.7",
     "@vue/cli-service": "5.0.0-beta.7",
     "@vue/compiler-sfc": "^3.0.0",
-    "electron": "14.0.1",
+    "electron": "^14.2.9",
     "eslint": "^7.15.0",
     "eslint-config-standard-with-typescript": "^21.0.0",
     "eslint-plugin-import": "^2.20.2",
